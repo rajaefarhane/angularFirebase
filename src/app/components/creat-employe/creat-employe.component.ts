@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { EmployeService } from 'src/app/services/employe.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-creat-employe',
@@ -10,7 +12,9 @@ export class CreatEmployeComponent implements OnInit {
   createEmploy: FormGroup;
   submitte = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private _employService: EmployeService,
+              private router: Router,) {
     this.createEmploy = this.fb.group({
       name: ['', Validators.required],
       namee: ['', Validators.required],
@@ -36,6 +40,17 @@ export class CreatEmployeComponent implements OnInit {
       fechaCreacion: new Date(),
       fechaActualizacion: new Date()
     }
-    console.log(employ);
+    //console.log(employ);
+    this._employService.addEmploy(employ).then(()=>{
+      console.log("vous avez bien ajouter l'employé");
+      this.router.navigate(['/liste-employ']);
+    }).catch(error =>{
+      console.log(error);
+      
+    })
+  
+      
+    
+  
   }
 }
