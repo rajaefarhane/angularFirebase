@@ -4,17 +4,18 @@
         <div class="card text-center">
             <div class="card-body">
               <h3> creat employ</h3>
-              <form>
+              <span *ngIf="submitte && createEmploy.invalid" class="badge badge-danger bg-danger mb-4">Tous les champs sont obligatoire</span>
+              <form  [formGroup]="createEmploy" (ngSubmit)="addEmploy()">
                   <div class="row">
                       <div class="col">
-                          <input type="text" class="form-control form-control-lg" placeholder="number">
+                          <input type="text" class="form-control form-control-lg" placeholder="nom" formControlName="name">
                       </div>
                       <div class="col">
-                        <input type="text" class="form-control form-control-lg" placeholder="id">
+                        <input type="text" class="form-control form-control-lg" placeholder="prenom" formControlName="namee">
                       </div>
                     </div>
-                      <input type="text" class="form-control form-control-lg mt-3" placeholder="reference">
-                      <input type="text" class="form-control form-control-lg mt-3" placeholder="salair">
+                      <input type="text" class="form-control form-control-lg mt-3" placeholder="reference" formControlName="reference">
+                      <input type="number" class="form-control form-control-lg mt-3" placeholder="salair" formControlName="salaire">
                     <div class="mt-3">
                         <button type="text" class="btn btn-secondary btn-lg " routerLink="/list-employ">Annuler</button>
                         <button type="submit" class="btn btn-dark btn-lg annuler" > Add</button>

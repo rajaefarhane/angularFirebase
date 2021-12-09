@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import 'rxjs';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 //components
@@ -28,7 +29,8 @@ import { environment } from 'src/environments/environment';
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
