@@ -17,4 +17,7 @@ export class EmployeService {
     return this.firestore.collection('employs', ref => ref.orderBy('fechaCreacion', 'asc')).snapshotChanges();
     //return this.firestore.collection('employs', ref => ref.orderBy('fechaCreacion', 'desc')).snapshotChanges();
   }
+  supprimerEmploys(id:string):Promise<any>{
+     return this.firestore.collection('employs').doc(id).delete();
+  }
 }

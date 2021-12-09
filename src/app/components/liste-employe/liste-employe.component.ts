@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import {Observable} from 'rxjs';
 import { EmployeService } from 'src/app/services/employe.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -12,7 +13,10 @@ import { EmployeService } from 'src/app/services/employe.service';
 export class ListeEmployeComponent implements OnInit {
 employs:any[]=[];
 items: Observable<any[]>;
-  constructor(private _employsServices:EmployeService, firestore: AngularFirestore) {
+  constructor(private _employsServices:EmployeService,
+              firestore: AngularFirestore,
+              private toastr: ToastrService) {
+
     this.items = firestore.collection('items').valueChanges();
     //this.employs= firestore.collection('employs').valueChanges();
 
@@ -36,5 +40,22 @@ items: Observable<any[]>;
     console.log(this.employs);
   });
   
+  }
+  supprimerEmploys(id:string){
+     //alert("bonjour");
+    var res = confirm("Êtes-vous sûr de vouloir supprimer?");
+    if(res){
+      this._employsServices.supprimerEmploys(id).then(()=>{
+        //console.log("employé est bien supprimer");
+        this.toastr.error('vous avez bien supprimer employé', 'supprimer avec succes',{
+          positionClass: 'toast-bottom-right'
+        });
+      }).catch(error =>{
+        console.log(error);
+      })
+    }
+  
+   
+ 
   }
 }
