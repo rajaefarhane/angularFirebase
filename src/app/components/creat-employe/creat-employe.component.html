@@ -3,12 +3,12 @@
     <div class="col-lg-6 offset-lg-3 mt-5">
         <div class="card text-center">
             <div class="card-body float-right">
-              <h3> creat employ</h3>
+              <h3> {{title}}</h3>
               <div *ngIf="loading" class="spinner-border" role="status">
                 <span class="visually-hidden">Loading...</span>
               </div>
               <span *ngIf="submitte && createEmploy.invalid" class="badge badge-danger bg-danger mb-4">Tous les champs sont obligatoire</span>
-              <form  [formGroup]="createEmploy" (ngSubmit)="addEmploy()">
+              <form  [formGroup]="createEmploy" (ngSubmit)="addmodifEmploy()">
                   <div class="row">
                       <div class="col">
                           <input type="text" class="form-control form-control-lg" placeholder="nom" formControlName="name">

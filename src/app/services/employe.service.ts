@@ -20,4 +20,11 @@ export class EmployeService {
   supprimerEmploys(id:string):Promise<any>{
      return this.firestore.collection('employs').doc(id).delete();
   }
+  getEmploy(id:string): Observable<any>{
+    return this.firestore.collection('employs').doc(id).snapshotChanges();
+
+  }
+  actualisEmploy(id:string, data:any):Promise<any>{
+    return this.firestore.collection('employs').doc(id).update(data);
+  }
 }
