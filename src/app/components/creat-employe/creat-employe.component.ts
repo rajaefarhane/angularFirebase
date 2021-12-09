@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EmployeService } from 'src/app/services/employe.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-creat-employe',
@@ -14,7 +15,8 @@ export class CreatEmployeComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private _employService: EmployeService,
-              private router: Router,) {
+              private router: Router,
+              private toastr: ToastrService) {
     this.createEmploy = this.fb.group({
       name: ['', Validators.required],
       namee: ['', Validators.required],
@@ -42,7 +44,10 @@ export class CreatEmployeComponent implements OnInit {
     }
     //console.log(employ);
     this._employService.addEmploy(employ).then(()=>{
-      console.log("vous avez bien ajouter l'employé");
+      this.toastr.success('vous avez bien ajouter employé', 'ajouter avec succes',{
+        positionClass: 'toast-bottom-right'
+      });
+      //console.log("vous avez bien ajouter l'employé");
       this.router.navigate(['/liste-employ']);
     }).catch(error =>{
       console.log(error);
