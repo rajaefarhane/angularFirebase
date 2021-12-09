@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import {Observable} from 'rxjs';
+import { EmployeService } from 'src/app/services/employe.service';
+
 
 @Component({
   selector: 'app-liste-employe',
@@ -8,13 +10,18 @@ import {Observable} from 'rxjs';
   styleUrls: ['./liste-employe.component.css']
 })
 export class ListeEmployeComponent implements OnInit {
-
-
-  constructor() {
+employs:Observable<any[]>;
+items: Observable<any[]>;
+  constructor(private _employsServices:EmployeService, firestore: AngularFirestore) {
+    this.items = firestore.collection('items').valueChanges();
+    this.employs= firestore.collection('employs').valueChanges();
 
    }
 
   ngOnInit(): void {
+    this.getEmpleados;
   }
-
+  getEmpleados() {
+  
+  }
 }
