@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class CreatEmployeComponent implements OnInit {
   createEmploy: FormGroup;
   submitte = false;
+  loading = false;
 
   constructor(private fb: FormBuilder,
               private _employService: EmployeService,
@@ -42,15 +43,18 @@ export class CreatEmployeComponent implements OnInit {
       fechaCreacion: new Date(),
       fechaActualizacion: new Date()
     }
+    this.loading=true;
     //console.log(employ);
     this._employService.addEmploy(employ).then(()=>{
       this.toastr.success('vous avez bien ajouter employé', 'ajouter avec succes',{
         positionClass: 'toast-bottom-right'
       });
+      this.loading=false;
       //console.log("vous avez bien ajouter l'employé");
       this.router.navigate(['/liste-employ']);
     }).catch(error =>{
       console.log(error);
+      this.loading=false;
       
     })
   
